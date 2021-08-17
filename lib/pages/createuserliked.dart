@@ -23,6 +23,7 @@ class _CreateUserLikedState extends State<CreateUserLiked> {
   String? brandName;
   String? type;
   String? drinkName;
+  String? locationType;
 
   createUserBar() async {
     if (barName != null && location != null) {
@@ -411,33 +412,28 @@ class _CreateUserLikedState extends State<CreateUserLiked> {
             Padding(
               padding: const EdgeInsets.only(left: 6, right: 6, top: 4),
               child: DropdownButtonFormField(
-                  items: [
-                    'Columbus',
-                    'Chicago',
-                    'New York',
-                    'Denver',
-                    'Washington DC',
-                    'San Francisco',
-                    'Orlando',
-                    'Phoenix',
-                    'Boston',
-                    'Los Angeles'
-                  ]
-                      .map((String value) => DropdownMenuItem<String>(
-                            child: Text(value),
-                            value: value,
-                          ))
-                      .toList(),
-                  onChanged: (String? value) {
-                    if (mounted) {
-                      setState(() {
-                        location = value!;
-                      });
-                    }
-                  },
-                  hint: Text('Location*'),
-                  decoration: InputDecoration(focusColor: Colors.black)),
+                items: ['City', 'College']
+                    .map((String value) => DropdownMenuItem<String>(
+                          child: Text(value),
+                          value: value,
+                        ))
+                    .toList(),
+                onChanged: (String? value) {
+                  if (mounted) {
+                    setState(() {
+                      locationType = value!;
+                    });
+                  }
+                },
+                hint: Text('Location Type*'),
+                decoration: InputDecoration(focusColor: Colors.black),
+              ),
             ),
+            const Divider(
+              color: Colors.white,
+              thickness: 1.5,
+            ),
+            _locationDropdown(),
             const Divider(
               color: Colors.white,
               thickness: 1.5,
@@ -515,6 +511,76 @@ class _CreateUserLikedState extends State<CreateUserLiked> {
         ),
       ),
     );
+  }
+
+  Widget _locationDropdown() {
+    if (locationType == 'City') {
+      return Padding(
+        padding: const EdgeInsets.only(left: 6, right: 6, top: 4),
+        child: DropdownButtonFormField(
+            items: [
+              'Columbus',
+              'Chicago',
+              'New York',
+              'Denver',
+              'Washington DC',
+              'San Francisco',
+              'Orlando',
+              'Phoenix',
+              'Boston',
+              'Los Angeles'
+            ]
+                .map((String value) => DropdownMenuItem<String>(
+                      child: Text(value),
+                      value: value,
+                    ))
+                .toList(),
+            onChanged: (String? value) {
+              if (mounted) {
+                setState(() {
+                  location = value!;
+                });
+              }
+            },
+            hint: Text('City*'),
+            decoration: InputDecoration(focusColor: Colors.black)),
+      );
+    } else if (locationType == 'College') {
+      return Padding(
+        padding: const EdgeInsets.only(left: 6, right: 6, top: 4),
+        child: DropdownButtonFormField(
+            items: [
+              'Ohio State',
+              'University of Michigan',
+              'Michigan State',
+              'Penn State',
+              'University of Illinois',
+              'University of Wisconsin'
+            ]
+                .map((String value) => DropdownMenuItem<String>(
+                      child: Text(value),
+                      value: value,
+                    ))
+                .toList(),
+            onChanged: (String? value) {
+              if (mounted) {
+                setState(() {
+                  location = value!;
+                });
+              }
+            },
+            hint: Text('College*'),
+            decoration: InputDecoration(focusColor: Colors.black)),
+      );
+    } else {
+      return Padding(
+        padding: const EdgeInsets.only(left: 6, right: 6, top: 4),
+        child: DropdownButtonFormField(
+            items: [],
+            hint: Text('Location*'),
+            decoration: InputDecoration(focusColor: Colors.black)),
+      );
+    }
   }
 
   Widget _createDisplay() {

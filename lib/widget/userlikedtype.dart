@@ -116,7 +116,7 @@ class UserLikedTypeWidget extends StatelessWidget {
       children: [
         _barDisplay(barInfo),
         Icon(
-          Icons.business,
+          Icons.sports_bar,
           color: Colors.red,
         )
       ],
@@ -159,7 +159,7 @@ class UserLikedTypeWidget extends StatelessWidget {
           ],
         ),
         Icon(
-          Icons.branding_watermark,
+          Icons.local_bar,
           color: Colors.red,
         )
       ],

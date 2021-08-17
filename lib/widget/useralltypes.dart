@@ -225,7 +225,7 @@ class _UserAllTypesState extends State<UserAllTypes> {
         _likeIcon(widget.info),
         _barDisplay(barInfo),
         Icon(
-          Icons.business,
+          Icons.sports_bar,
           color: Colors.red,
         )
       ],
@@ -368,7 +368,7 @@ class _UserAllTypesState extends State<UserAllTypes> {
               ],
             ),
             Icon(
-              Icons.business,
+              Icons.sports_bar,
               color: Colors.red,
             )
           ],

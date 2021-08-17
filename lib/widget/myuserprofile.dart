@@ -417,7 +417,7 @@ class _MyUserProfileState extends State<MyUserProfile> {
         children: [
           IconButton(
               icon: Icon(
-                Icons.business,
+                Icons.sports_bar,
                 color: Colors.red,
               ),
               onPressed: () {
@@ -436,7 +436,7 @@ class _MyUserProfileState extends State<MyUserProfile> {
         children: [
           IconButton(
               icon: Icon(
-                Icons.business,
+                Icons.sports_bar,
                 color: Colors.red,
               ),
               onPressed: () {
@@ -459,7 +459,7 @@ class _MyUserProfileState extends State<MyUserProfile> {
         children: [
           IconButton(
               icon: Icon(
-                Icons.branding_watermark,
+                Icons.local_bar,
                 color: Colors.red,
               ),
               onPressed: () {
@@ -478,7 +478,7 @@ class _MyUserProfileState extends State<MyUserProfile> {
         children: [
           IconButton(
               icon: Icon(
-                Icons.branding_watermark,
+                Icons.local_bar,
                 color: Colors.red,
               ),
               onPressed: () {

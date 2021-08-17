@@ -195,7 +195,7 @@ class UserMyLikedType extends StatelessWidget {
         ),
         _barDisplay(barInfo),
         Icon(
-          Icons.business,
+          Icons.sports_bar,
           color: Colors.red,
         )
       ],
@@ -245,7 +245,7 @@ class UserMyLikedType extends StatelessWidget {
               ],
             ),
             Icon(
-              Icons.branding_watermark,
+              Icons.local_bar,
               color: Colors.red,
             )
           ],
