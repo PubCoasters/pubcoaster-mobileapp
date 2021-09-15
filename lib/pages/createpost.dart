@@ -25,6 +25,7 @@ class _CreatePostState extends State<CreatePost> {
   String? picLink;
   File? _image;
   String? locationType;
+  String? busyness;
   bool filePicked = false;
   final postService = new PostService();
 
@@ -188,7 +189,9 @@ class _CreatePostState extends State<CreatePost> {
         descrip == "" ||
         rating == null ||
         loc == null ||
-        loc == "") {
+        loc == "" ||
+        busyness == null ||
+        busyness == "") {
       final snackBar = SnackBar(
           content: Text(
               'Please fill out all required info before trying to create a post!!',
@@ -230,7 +233,8 @@ class _CreatePostState extends State<CreatePost> {
                 'rating': rating,
                 'location': loc,
                 'nbhood': nbhood,
-                'picLink': url
+                'picLink': url,
+                'busyness': busyness,
               };
               bool succeed = await postService.addPost(reqBody);
               if (succeed) {
@@ -284,6 +288,7 @@ class _CreatePostState extends State<CreatePost> {
           'rating': rating,
           'location': loc,
           'nbhood': nbhood,
+          'busyness': busyness,
           'picLink': ''
         };
         bool succeed = await postService.addPost(reqBody);
@@ -469,6 +474,35 @@ class _CreatePostState extends State<CreatePost> {
                         thickness: 0.5,
                       ),
                       Padding(
+                        padding: const EdgeInsets.only(left: 6, right: 6),
+                        child: DropdownButtonFormField(
+                          items: [
+                            'Dead AF',
+                            'Some Crowd',
+                            'Lively Enough',
+                            'There Are Lines',
+                            'Can’t Move'
+                          ]
+                              .map((String value) => DropdownMenuItem<String>(
+                                    child: Text(value),
+                                    value: value,
+                                  ))
+                              .toList(),
+                          onChanged: (String? value) {
+                            if (mounted) {
+                              setState(() {
+                                busyness = value;
+                              });
+                            }
+                          },
+                          hint: Text('How Busy Would You Say It Is?*'),
+                        ),
+                      ),
+                      const Divider(
+                        color: Colors.white,
+                        thickness: 0.75,
+                      ),
+                      Padding(
                         padding: const EdgeInsets.only(left: 4, right: 4),
                         child: TextField(
                           decoration: InputDecoration(
@@ -513,7 +547,7 @@ class _CreatePostState extends State<CreatePost> {
                               });
                             }
                           },
-                          hint: Text('Rating*'),
+                          hint: Text('Experience Rating*'),
                         ),
                       ),
                       const Divider(

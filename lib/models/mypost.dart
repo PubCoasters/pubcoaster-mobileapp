@@ -6,6 +6,7 @@ class MyPost {
   final String location;
   final String createdAt;
   final int rating;
+  final String? busyness;
   final String? editedAt;
   final int numComments;
   final int numLikes;
@@ -22,6 +23,7 @@ class MyPost {
       required this.createdAt,
       required this.rating,
       this.editedAt,
+      this.busyness,
       this.neighborhood,
       required this.numComments,
       required this.numLikes,
@@ -38,6 +40,7 @@ class MyPost {
           location: json['location'],
           editedAt: json['editedAt'],
           anonymous: json['anonymous'],
+          busyness: json['busyness'],
           rating: json['rating'],
           numComments: json['numComments'],
           numLikes: json['numLikes'],
@@ -52,6 +55,7 @@ class MyPost {
           description: json['description'],
           location: json['location'],
           editedAt: json['editedAt'],
+          busyness: json['busyness'],
           anonymous: json['anonymous'],
           rating: json['rating'],
           numComments: json['numComments'],

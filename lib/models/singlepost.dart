@@ -9,6 +9,7 @@ class SinglePost {
   final int rating;
   final String? createdBy;
   final bool? anonymous;
+  final String? busyness;
   final String? neighborhood;
   final List<dynamic> comments;
   final List<dynamic> likes;
@@ -17,6 +18,7 @@ class SinglePost {
       {required this.uuid,
       this.picLink,
       this.anonymous,
+      this.busyness,
       required this.bar,
       required this.comments,
       required this.createdAt,
@@ -38,6 +40,7 @@ class SinglePost {
           location: json['location'],
           editedAt: json['editedAt'],
           anonymous: json['anonymous'],
+          busyness: json['busyness'],
           rating: json['rating'],
           comments: json['comments'],
           likes: json['likes'],
@@ -51,6 +54,7 @@ class SinglePost {
           bar: json['bar'],
           description: json['description'],
           location: json['location'],
+          busyness: json['busyness'],
           editedAt: json['editedAt'],
           anonymous: json['anonymous'],
           rating: json['rating'],
@@ -66,6 +70,7 @@ class SinglePost {
           description: json['description'],
           location: json['location'],
           editedAt: json['editedAt'],
+          busyness: json['busyness'],
           anonymous: json['anonymous'],
           rating: json['rating'],
           comments: json['comments'],
@@ -79,6 +84,7 @@ class SinglePost {
           bar: json['bar'],
           description: json['description'],
           location: json['location'],
+          busyness: json['busyness'],
           editedAt: json['editedAt'],
           anonymous: json['anonymous'],
           rating: json['rating'],

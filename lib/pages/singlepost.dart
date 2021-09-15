@@ -68,6 +68,7 @@ class _SinglePostState extends State<SinglePost> {
                           item.editedAt,
                           item.picLink,
                           item.uuid,
+                          item.busyness,
                           item.description,
                           item.anonymous,
                           item.comments,

@@ -31,6 +31,10 @@ import 'package:NewApp/pages/myfollower.dart';
 import 'package:NewApp/pages/myfollowing.dart';
 import 'package:NewApp/pages/userfollower.dart';
 import 'package:NewApp/pages/userfollowing.dart';
+import 'package:NewApp/pages/searchbusybar.dart';
+import 'package:NewApp/pages/searchbusybarfromfeed.dart';
+import 'package:NewApp/pages/feedback.dart';
+import 'package:NewApp/models/feedbackargs.dart';
 import 'package:NewApp/models/userpagesargs.dart';
 
 void main() {
@@ -81,6 +85,8 @@ class MyApp extends StatelessWidget {
                 '/adduserinfo': (context) => AddUserInfo(),
                 '/home': (context) => Home(),
                 '/mypost': (context) => MyPosts(),
+                SearchBusyBarFromFeed.route: (context) =>
+                    SearchBusyBarFromFeed(),
               },
               onGenerateRoute: (RouteSettings settings) {
                 //single post scenario
@@ -144,6 +150,12 @@ class MyApp extends StatelessWidget {
                   return MaterialPageRoute(builder: (context) {
                     return UserFollowing(args.user, args.myUser);
                   });
+                } else if (settings.name == FeedBack.route) {
+                  return MaterialPageRoute(builder: (context) {
+                    final FeedBackArgs args =
+                        settings.arguments as FeedBackArgs;
+                    return FeedBack(args.location, args.bar, args.neighborhood);
+                  });
                 }
                 var routes = <String, WidgetBuilder>{
                   LocationPosts.route: (context) =>
@@ -159,7 +171,9 @@ class MyApp extends StatelessWidget {
                   MyFollower.route: (context) =>
                       MyFollower(settings.arguments as String),
                   MyFollowing.route: (context) =>
-                      MyFollowing(settings.arguments as String)
+                      MyFollowing(settings.arguments as String),
+                  SearchBusyBar.route: (context) =>
+                      SearchBusyBar(settings.arguments as String),
                 };
                 WidgetBuilder builder = routes[settings.name]!;
                 return MaterialPageRoute(

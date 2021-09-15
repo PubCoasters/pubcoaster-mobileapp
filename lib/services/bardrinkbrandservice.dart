@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:http/http.dart' as https;
+import 'package:http/http.dart' as http;
 import 'config.dart';
 import 'dart:async';
 import 'package:NewApp/models/bars.dart';
@@ -63,7 +63,7 @@ class BarDrinkBrandService {
     };
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -91,7 +91,7 @@ class BarDrinkBrandService {
     };
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -119,7 +119,7 @@ class BarDrinkBrandService {
     };
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -146,7 +146,7 @@ class BarDrinkBrandService {
     };
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -167,7 +167,7 @@ class BarDrinkBrandService {
     };
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -188,7 +188,7 @@ class BarDrinkBrandService {
     };
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }

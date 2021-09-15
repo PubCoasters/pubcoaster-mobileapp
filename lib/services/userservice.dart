@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:http/http.dart' as https;
+import 'package:http/http.dart' as http;
 import 'config.dart';
 import 'dart:async';
 import 'package:NewApp/models/user.dart';
@@ -53,7 +53,7 @@ class UserService {
     var content;
 
     try {
-      content = await https.post(endpoint,
+      content = await http.post(endpoint,
           headers: headers, body: jsonEncode(reqBody));
     } catch (e) {
       print(e);
@@ -79,7 +79,7 @@ class UserService {
     var content;
 
     try {
-      content = await https.delete(endpoint, headers: headers);
+      content = await http.delete(endpoint, headers: headers);
     } catch (e) {
       print(e);
       succeed = false;
@@ -111,7 +111,7 @@ class UserService {
     bool succeed = true;
     var content;
     try {
-      content = await https.patch(endpoint,
+      content = await http.patch(endpoint,
           headers: headers, body: jsonEncode(reqBody));
     } catch (e) {
       print(e);
@@ -136,7 +136,7 @@ class UserService {
     };
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -158,7 +158,7 @@ class UserService {
     };
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -179,7 +179,7 @@ class UserService {
     };
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -201,7 +201,7 @@ class UserService {
     };
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -224,7 +224,7 @@ class UserService {
     };
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -250,7 +250,7 @@ class UserService {
     var content;
 
     try {
-      content = await https.post(endpoint,
+      content = await http.post(endpoint,
           headers: headers, body: jsonEncode(reqBody));
     } catch (e) {
       print(e);
@@ -281,7 +281,7 @@ class UserService {
     var content;
 
     try {
-      content = await https.post(endpoint,
+      content = await http.post(endpoint,
           headers: headers, body: jsonEncode(reqBody));
     } catch (e) {
       print(e);
@@ -308,7 +308,7 @@ class UserService {
     var content;
 
     try {
-      content = await https.post(endpoint,
+      content = await http.post(endpoint,
           headers: headers, body: jsonEncode(reqBody));
     } catch (e) {
       print(e);
@@ -336,7 +336,7 @@ class UserService {
     var reqBody = {'username': body['username'], 'uuid': body['uuid']};
 
     try {
-      content = await https.delete(endpoint,
+      content = await http.delete(endpoint,
           headers: headers, body: jsonEncode(reqBody));
     } catch (e) {
       print(e);
@@ -363,7 +363,7 @@ class UserService {
     var reqBody = {'username': body['username'], 'uuid': body['uuid']};
 
     try {
-      content = await https.delete(endpoint,
+      content = await http.delete(endpoint,
           headers: headers, body: jsonEncode(reqBody));
     } catch (e) {
       print(e);
@@ -390,7 +390,7 @@ class UserService {
 
     var reqBody = {'username': body['username'], 'uuid': body['uuid']};
     try {
-      content = await https.delete(endpoint,
+      content = await http.delete(endpoint,
           headers: headers, body: jsonEncode(reqBody));
     } catch (e) {
       print(e);

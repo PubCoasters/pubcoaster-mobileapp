@@ -2,7 +2,7 @@ import 'package:NewApp/models/feedpost.dart';
 import 'package:NewApp/models/follower.dart';
 import 'dart:async';
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as https;
+import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'config.dart';
@@ -32,7 +32,7 @@ class FollowerService {
     var content;
 
     try {
-      content = await https.post(endpoint,
+      content = await http.post(endpoint,
           headers: headers, body: jsonEncode(reqBody));
       succeed = true;
     } catch (e) {
@@ -58,7 +58,7 @@ class FollowerService {
     bool succeed;
     var content;
     try {
-      content = await https.delete(endpoint,
+      content = await http.delete(endpoint,
           headers: headers, body: jsonEncode(reqBody));
       succeed = true;
     } catch (e) {
@@ -87,7 +87,7 @@ class FollowerService {
     }
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -109,7 +109,7 @@ class FollowerService {
     }
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -132,7 +132,7 @@ class FollowerService {
     }
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -155,7 +155,7 @@ class FollowerService {
     }
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -177,7 +177,7 @@ class FollowerService {
     }
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }

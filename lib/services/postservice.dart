@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as https;
+import 'package:http/http.dart' as http;
 import 'config.dart';
 import 'package:NewApp/models/feedpost.dart';
 import 'package:NewApp/models/singlepost.dart';
@@ -37,7 +37,8 @@ class PostService {
       'rating': item['rating'],
       'neighborhood': item['nbhood'],
       'description': item['description'],
-      'picLink': item['picLink']
+      'picLink': item['picLink'],
+      'busyness': item['busyness'],
     };
 
     Map<String, String> headers = {
@@ -48,7 +49,7 @@ class PostService {
     bool succeed;
     var content;
     try {
-      content = await https.post(endpoint,
+      content = await http.post(endpoint,
           headers: headers, body: jsonEncode(reqBody));
       succeed = true;
     } catch (e) {
@@ -82,7 +83,7 @@ class PostService {
     var content;
 
     try {
-      content = await https.patch(endpoint,
+      content = await http.patch(endpoint,
           headers: headers, body: jsonEncode(reqBody));
       succeed = true;
     } catch (e) {
@@ -108,7 +109,7 @@ class PostService {
     var content;
 
     try {
-      content = await https.delete(endpoint, headers: headers);
+      content = await http.delete(endpoint, headers: headers);
       succeed = true;
     } catch (e) {
       print(e);
@@ -132,7 +133,7 @@ class PostService {
 
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -155,7 +156,7 @@ class PostService {
     }
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -179,7 +180,7 @@ class PostService {
     }
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -203,7 +204,7 @@ class PostService {
     }
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -227,7 +228,7 @@ class PostService {
     }
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -255,7 +256,7 @@ class PostService {
     }
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -281,7 +282,7 @@ class PostService {
     }
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -309,7 +310,7 @@ class PostService {
     }
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -337,7 +338,7 @@ class PostService {
     }
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }
@@ -365,7 +366,7 @@ class PostService {
     }
     var response;
     try {
-      response = await https.get(endpoint, headers: headers);
+      response = await http.get(endpoint, headers: headers);
     } catch (e) {
       print(e);
     }

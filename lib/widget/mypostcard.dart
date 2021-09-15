@@ -21,21 +21,24 @@ class MyPostCard extends StatefulWidget {
   final String? editedAt;
   final String? picLink;
   final String uuid;
+  final String? busyness;
 
   MyPostCard(
-      this.bar,
-      this.location,
-      this.username,
-      this.content,
-      this.rating,
-      this.timestamp,
-      this.neighborhood,
-      this.numComments,
-      this.numLikes,
-      this.anonymous,
-      this.editedAt,
-      this.picLink,
-      this.uuid);
+    this.bar,
+    this.location,
+    this.username,
+    this.content,
+    this.rating,
+    this.timestamp,
+    this.neighborhood,
+    this.numComments,
+    this.numLikes,
+    this.anonymous,
+    this.editedAt,
+    this.picLink,
+    this.uuid,
+    this.busyness,
+  );
 
   @override
   _MyPostCardState createState() => _MyPostCardState();
@@ -242,6 +245,23 @@ class _MyPostCardState extends State<MyPostCard> {
     }
   }
 
+  Widget busynessLevel() {
+    if (widget.busyness != null) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 4, bottom: 4),
+        child: Text(
+          'Busyness level: ${widget.busyness}',
+          style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'Merriweather-Regular',
+              fontSize: 15),
+        ),
+      );
+    } else {
+      return Container();
+    }
+  }
+
   String? dropdownValue;
   @override
   Widget build(BuildContext context) {
@@ -298,6 +318,11 @@ class _MyPostCardState extends State<MyPostCard> {
                       fontSize: 20),
                 ),
               ),
+              const Divider(
+                color: Colors.black,
+                thickness: 1.0,
+              ),
+              busynessLevel(),
               const Divider(color: Colors.white, thickness: 1.0),
               Padding(
                 padding: const EdgeInsets.only(top: 4, bottom: 4),

@@ -16,6 +16,7 @@ class SinglePostCard extends StatefulWidget {
   final String? editedAt;
   final String? picLink;
   final String uuid;
+  final String? busyness;
   final bool anonymous;
   final String description;
   final List<dynamic> comments;
@@ -32,6 +33,7 @@ class SinglePostCard extends StatefulWidget {
       this.editedAt,
       this.picLink,
       this.uuid,
+      this.busyness,
       this.description,
       this.anonymous,
       this.comments,
@@ -517,6 +519,23 @@ class _SinglePostCardState extends State<SinglePostCard> {
     }
   }
 
+  Widget busynessLevel() {
+    if (widget.busyness != null) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 4, bottom: 4),
+        child: Text(
+          'Busyness level: ${widget.busyness}',
+          style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'Merriweather-Regular',
+              fontSize: 15),
+        ),
+      );
+    } else {
+      return Container();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var newDate = HttpDate.parse(widget.timestamp);
@@ -571,6 +590,11 @@ class _SinglePostCardState extends State<SinglePostCard> {
                   fontSize: 25),
             ),
           ),
+          const Divider(
+            color: Colors.black,
+            thickness: 1.0,
+          ),
+          busynessLevel(),
           const Divider(
             color: Colors.white,
             thickness: 1,

@@ -20,21 +20,24 @@ class FeedPostCard extends StatelessWidget {
   final String? editedAt;
   final String? picLink;
   final String uuid;
+  final String? busyness;
 
   FeedPostCard(
-      this.bar,
-      this.location,
-      this.username,
-      this.content,
-      this.rating,
-      this.timestamp,
-      this.neighborhood,
-      this.numComments,
-      this.numLikes,
-      this.anonymous,
-      this.editedAt,
-      this.picLink,
-      this.uuid);
+    this.bar,
+    this.location,
+    this.username,
+    this.content,
+    this.rating,
+    this.timestamp,
+    this.neighborhood,
+    this.numComments,
+    this.numLikes,
+    this.anonymous,
+    this.editedAt,
+    this.picLink,
+    this.uuid,
+    this.busyness,
+  );
 
   goToSinglePost(context) async {
     String user = FirebaseAuth.instance.currentUser!.displayName!;
@@ -167,6 +170,23 @@ class FeedPostCard extends StatelessWidget {
     }
   }
 
+  Widget busynessLevel() {
+    if (busyness != null) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 4, bottom: 4),
+        child: Text(
+          'Busyness level: $busyness',
+          style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'Merriweather-Regular',
+              fontSize: 15),
+        ),
+      );
+    } else {
+      return Container();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var newDate = HttpDate.parse(timestamp);
@@ -212,6 +232,11 @@ class FeedPostCard extends StatelessWidget {
                     fontSize: 20),
               ),
             ),
+            const Divider(
+              color: Colors.black,
+              thickness: 1.0,
+            ),
+            busynessLevel(),
             const Divider(color: Colors.white, thickness: 1.0),
             Padding(
               padding: const EdgeInsets.only(top: 4, bottom: 4),
