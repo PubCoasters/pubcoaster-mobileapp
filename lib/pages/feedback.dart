@@ -4,6 +4,7 @@ import 'package:NewApp/widget/navbarhome.dart';
 import 'package:NewApp/widget/navdrawer.dart';
 import 'package:NewApp/services/busyservice.dart';
 import 'package:NewApp/pages/locationposts.dart';
+import 'package:strings/strings.dart';
 
 class FeedBack extends StatefulWidget {
   static const route = '/feedback';
@@ -103,7 +104,7 @@ class _FeedBackState extends State<FeedBack> {
       return Padding(
         padding: const EdgeInsets.only(top: 8, bottom: 0),
         child: Text(
-          'Tell us about how busy ${widget.bar} in ${widget.location} was',
+          'Tell us about how busy ${capitalize(widget.bar)} in ${widget.location} was',
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 25,
@@ -115,7 +116,7 @@ class _FeedBackState extends State<FeedBack> {
       return Padding(
         padding: const EdgeInsets.only(top: 8, bottom: 0),
         child: Text(
-          'Tell us about ${widget.bar} in ${widget.neighborhood}, ${widget.location} was',
+          'Tell us about ${capitalize(widget.bar)} in ${capitalize(widget.neighborhood!)}, ${widget.location} was',
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 25,

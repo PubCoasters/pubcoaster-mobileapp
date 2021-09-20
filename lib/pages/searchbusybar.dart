@@ -7,6 +7,7 @@ import 'package:NewApp/pages/feedback.dart';
 import 'package:NewApp/models/feedbackargs.dart';
 import 'package:NewApp/services/busyservice.dart';
 import 'package:NewApp/pages/locationposts.dart';
+import 'package:strings/strings.dart';
 
 class SearchBusyBar extends StatefulWidget {
   final location;
@@ -109,7 +110,7 @@ class _SearchBusyBarState extends State<SearchBusyBar> {
       String _url = 'https://google.com/search';
       barName = barName!.replaceAll(' ', '-');
       _url += '?q=${widget.location}+$barName';
-      await launch(_url);
+      await launch(_url, forceWebView: true, enableJavaScript: true);
       Navigator.pushReplacementNamed(context, FeedBack.route,
           arguments: FeedBackArgs(location: widget.location, bar: barName!));
     } else {
@@ -117,7 +118,7 @@ class _SearchBusyBarState extends State<SearchBusyBar> {
       barName = barName!.replaceAll(' ', '-');
       neighborhood = neighborhood!.replaceAll(' ', '-');
       _url += '?q=${widget.location}+$neighborhood+$barName';
-      await launch(_url);
+      await launch(_url, forceWebView: true, enableJavaScript: true);
       Navigator.pushReplacementNamed(context, FeedBack.route,
           arguments: FeedBackArgs(
               location: widget.location,
@@ -144,7 +145,7 @@ class _SearchBusyBarState extends State<SearchBusyBar> {
                 bottom: MediaQuery.of(context).size.height * .2,
               ),
               title: Text(
-                'Busyness Level for $barName in ${widget.location}',
+                'Busyness Level for ${capitalize(barName!)} in ${widget.location}',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
