@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -10,6 +11,7 @@ class _SignUpState extends State<SignUp> {
   String? email;
   String? password;
   String? confirm;
+  bool agreed = false;
 
   signUp() async {
     if (password == confirm) {
@@ -102,42 +104,49 @@ class _SignUpState extends State<SignUp> {
       body: Form(
         child: SingleChildScrollView(
           child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            const SizedBox(
-              height: 70,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: Text(
-                  'Sign Up',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, decoration: TextDecoration.underline),
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              const SizedBox(
+                height: 70,
               ),
-            ),
-            const Divider(thickness: .003, color: Colors.white),
-            ElevatedButton(
-              onPressed: () {
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: Text(
+                  'Sign Up',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                      decoration: TextDecoration.underline),
+                ),
+              ),
+              const Divider(thickness: .003, color: Colors.white),
+              ElevatedButton(
+                onPressed: () {
                   Navigator.pushReplacementNamed(context, '/signin');
-              },
-              child: Padding(
+                },
+                child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Back to Sign In Page',
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18),
                   ),
-              ),
-              style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                ),
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.red),
                     shape: MaterialStateProperty.all<OutlinedBorder>(
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0),
                             side: BorderSide(color: Colors.red)))),
-            ),
-            const Divider(thickness: 1.8, color: Colors.white),
-            Padding(
-              padding: const EdgeInsets.only(left: 6, right: 6, top: 6),
-              child: TextField(
+              ),
+              const Divider(thickness: 1.8, color: Colors.white),
+              Padding(
+                padding: const EdgeInsets.only(left: 6, right: 6, top: 6),
+                child: TextField(
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), labelText: 'Email'),
                   onChanged: (value) => {
@@ -146,12 +155,12 @@ class _SignUpState extends State<SignUp> {
                         setState(() => {email = value})
                       }
                   },
+                ),
               ),
-            ),
-            const Divider(thickness: 0.05, color: Colors.white),
-            Padding(
-              padding: const EdgeInsets.only(left: 6, right: 6),
-              child: TextField(
+              const Divider(thickness: 0.05, color: Colors.white),
+              Padding(
+                padding: const EdgeInsets.only(left: 6, right: 6),
+                child: TextField(
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), labelText: 'Password'),
                   onChanged: (value) => {
@@ -161,14 +170,15 @@ class _SignUpState extends State<SignUp> {
                       }
                   },
                   obscureText: true,
+                ),
               ),
-            ),
-            const Divider(thickness: 0.05, color: Colors.white),
-            Padding(
-              padding: const EdgeInsets.only(left: 6, right: 6, bottom: 2),
-              child: TextField(
+              const Divider(thickness: 0.05, color: Colors.white),
+              Padding(
+                padding: const EdgeInsets.only(left: 6, right: 6, bottom: 2),
+                child: TextField(
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'Confirm Password'),
+                      border: OutlineInputBorder(),
+                      labelText: 'Confirm Password'),
                   obscureText: true,
                   onChanged: (value) => {
                     if (mounted)
@@ -176,39 +186,74 @@ class _SignUpState extends State<SignUp> {
                         setState(() => {confirm = value})
                       }
                   },
+                ),
               ),
-            ),
-            const Divider(thickness: 0.05, color: Colors.white),
-            ElevatedButton(
-              onPressed: () {
+              const Divider(thickness: 0.05, color: Colors.white),
+              ElevatedButton(
+                onPressed: () {
                   signUp();
-              },
-              child: Padding(
+                },
+                child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Sign Up',
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18),
                   ),
-              ),
-              style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                ),
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.red),
                     shape: MaterialStateProperty.all<OutlinedBorder>(
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0),
                             side: BorderSide(color: Colors.red)))),
-            ),
-            const Divider(color: Colors.white, thickness: 10),
-            Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: Image(
-                image: AssetImage('assets/img/sign_up.jpg'),
               ),
-            ),
-            const SizedBox(
-              height: 110,
-            ),
-          ],
-        ),
+              Padding(
+                padding: const EdgeInsets.only(top: 4),
+                child: CheckboxListTile(
+                  value: agreed,
+                  title: Text(
+                      'By signing up, you agree to our Terms and certify that you 21 years old or older',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                  onChanged: (bool? value) {
+                    if (mounted) {
+                      setState(() {
+                        agreed = value!;
+                      });
+                    }
+                  },
+                  secondary: Icon(Icons.security, size: 30),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 4),
+                child: GestureDetector(
+                  child: Text(
+                    'Terms of Use',
+                    style: TextStyle(),
+                  ),
+                  onTap: () => {
+                    launch(
+                        'https://docs.google.com/document/d/1zPH2uDM0yCxCzCIp_wlMISzH5rhmNsosBRXAsSzubnU/edit')
+                  },
+                ),
+              ),
+              const Divider(color: Colors.white, thickness: 10),
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: Image(
+                  image: AssetImage('assets/img/sign_up.jpg'),
+                ),
+              ),
+              const SizedBox(
+                height: 110,
+              ),
+            ],
+          ),
         ),
       ),
     );
