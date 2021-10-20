@@ -87,15 +87,32 @@ class _LocationPostsState extends State<LocationPosts> {
                       child: Column(
                         children: [
                           SizedBox(
-                              height: MediaQuery.of(context).size.height * .1),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 12),
-                            child: Text('No posts for ${widget.location} yet',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 30,
-                                    decoration: TextDecoration.underline)),
+                            height: MediaQuery.of(context).size.height * .1,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                    'No posts for ${widget.location} yet',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 30,
+                                        decoration: TextDecoration.underline)),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  goToSearchBusyBar();
+                                },
+                                icon: Icon(Icons.bar_chart_rounded),
+                                iconSize:
+                                    MediaQuery.of(context).size.height * .075,
+                                tooltip:
+                                    'See how busy bars in ${widget.location} are',
+                                color: Colors.red,
+                              )
+                            ],
                           ),
                           Expanded(
                               child: Image(
