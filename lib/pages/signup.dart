@@ -14,7 +14,7 @@ class _SignUpState extends State<SignUp> {
   bool agreed = false;
 
   signUp() async {
-    if (password == confirm) {
+    if (password == confirm && agreed && email != null) {
       try {
         UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email!, password: password!);
@@ -85,6 +85,36 @@ class _SignUpState extends State<SignUp> {
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
       }
+    } else if (email == null) {
+      final snackBar = SnackBar(
+          content: Text('Email needs to filled out',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 20)),
+          backgroundColor: Colors.red);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else if (password == null || confirm == null) {
+      final snackBar = SnackBar(
+          content: Text('Passwords need to be filled out',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 20)),
+          backgroundColor: Colors.red);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else if (!agreed) {
+      final snackBar = SnackBar(
+          content: Text('You have to agree to the terms',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 20)),
+          backgroundColor: Colors.red);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } else {
       final snackBar = SnackBar(
           content: Text('Passwords need to match',
@@ -211,6 +241,7 @@ class _SignUpState extends State<SignUp> {
                             borderRadius: BorderRadius.circular(18.0),
                             side: BorderSide(color: Colors.red)))),
               ),
+              const Divider(thickness: 0.05, color: Colors.white),
               Padding(
                 padding: const EdgeInsets.only(top: 4),
                 child: CheckboxListTile(
@@ -218,7 +249,7 @@ class _SignUpState extends State<SignUp> {
                   title: Text(
                       'By signing up, you agree to our Terms and certify that you 21 years old or older',
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.w500)),
                   onChanged: (bool? value) {
                     if (mounted) {
                       setState(() {
@@ -234,7 +265,12 @@ class _SignUpState extends State<SignUp> {
                 child: GestureDetector(
                   child: Text(
                     'Terms of Use',
-                    style: TextStyle(),
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
                   onTap: () => {
                     launch(
