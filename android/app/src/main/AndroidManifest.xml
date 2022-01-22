@@ -14,6 +14,12 @@
         </intent>
 
         <intent>
+          <action android:name="android.intent.action.SEND" />
+          <!-- Replace with the MIME type that your app works with, if needed. -->
+          <data android:mimeType="*/*" />
+        </intent>
+
+        <intent>
           <action android:name="android.support.customtabs.action.CustomTabsService" />
         </intent>
     </queries>
