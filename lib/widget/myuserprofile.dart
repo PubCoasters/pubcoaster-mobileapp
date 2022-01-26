@@ -138,18 +138,23 @@ class _MyUserProfileState extends State<MyUserProfile> {
 
   Widget _deleteDialog() {
     return AlertDialog(
-        title: Text(
-          'Confirm deleting your account',
-          style: TextStyle(
-              fontWeight: FontWeight.bold, color: Colors.black, fontSize: 23),
-          textAlign: TextAlign.center,
-        ),
-        backgroundColor: Colors.white,
-        content:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      title: Text(
+        'Last time.... THIS IS PERMANENT',
+        style: TextStyle(
+            fontWeight: FontWeight.bold, color: Colors.black, fontSize: 23),
+        textAlign: TextAlign.center,
+      ),
+      backgroundColor: Colors.white,
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
           FloatingActionButton(
             child: Icon(Icons.cancel),
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
+            },
             tooltip: 'Cancel',
             backgroundColor: Colors.red,
           ),
@@ -159,7 +164,80 @@ class _MyUserProfileState extends State<MyUserProfile> {
             onPressed: () => _deleteAccount(),
             backgroundColor: Colors.red,
           )
-        ]));
+        ],
+      ),
+    );
+  }
+
+  Widget _confirmAgainDialog() {
+    return AlertDialog(
+      title: Text(
+        'Are you absolutely sure you want to delete your account?',
+        style: TextStyle(
+            fontWeight: FontWeight.bold, color: Colors.black, fontSize: 23),
+        textAlign: TextAlign.center,
+      ),
+      backgroundColor: Colors.white,
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          FloatingActionButton(
+            child: Icon(Icons.cancel),
+            onPressed: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pop();
+            },
+            tooltip: 'Cancel',
+            backgroundColor: Colors.red,
+          ),
+          FloatingActionButton(
+            child: Icon(Icons.check),
+            tooltip: 'Confirm',
+            onPressed: () => showDialog(
+              context: context,
+              builder: (BuildContext content) {
+                return _deleteDialog();
+              },
+            ),
+            backgroundColor: Colors.red,
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _confirmDialog() {
+    return AlertDialog(
+      title: Text(
+        'Confirm deleting your account',
+        style: TextStyle(
+            fontWeight: FontWeight.bold, color: Colors.black, fontSize: 23),
+        textAlign: TextAlign.center,
+      ),
+      backgroundColor: Colors.white,
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          FloatingActionButton(
+            child: Icon(Icons.cancel),
+            onPressed: () => Navigator.of(context).pop(),
+            tooltip: 'Cancel',
+            backgroundColor: Colors.red,
+          ),
+          FloatingActionButton(
+            child: Icon(Icons.check),
+            tooltip: 'Confirm',
+            onPressed: () => showDialog(
+              context: context,
+              builder: (BuildContext content) {
+                return _confirmAgainDialog();
+              },
+            ),
+            backgroundColor: Colors.red,
+          )
+        ],
+      ),
+    );
   }
 
   Widget _pictureDialog() {
@@ -591,7 +669,7 @@ class _MyUserProfileState extends State<MyUserProfile> {
             showDialog(
               context: context,
               builder: (BuildContext content) {
-                return _deleteDialog();
+                return _confirmDialog();
               },
             );
           },
