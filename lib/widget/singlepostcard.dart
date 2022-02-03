@@ -5,6 +5,7 @@ import 'package:strings/strings.dart';
 import 'package:NewApp/services/postservice.dart';
 import 'package:NewApp/services/commentservice.dart';
 import 'package:NewApp/services/likeservice.dart';
+import 'package:NewApp/widget/reportpost.dart';
 
 class SinglePostCard extends StatefulWidget {
   final String bar;
@@ -563,12 +564,18 @@ class _SinglePostCardState extends State<SinglePostCard> {
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 4),
-                child: Text(
-                  'User Rating: ${widget.rating}/10',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Merriweather-Regular',
-                      fontSize: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    ReportPost(widget.uuid),
+                    Text(
+                      'User Rating: ${widget.rating}/10',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Merriweather-Regular',
+                          fontSize: 15),
+                    ),
+                  ],
                 ),
               )
             ],

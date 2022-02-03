@@ -5,6 +5,7 @@ import 'package:strings/strings.dart';
 import 'package:NewApp/pages/singlepost.dart';
 import 'package:NewApp/models/postargs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:NewApp/widget/reportpost.dart';
 
 class FeedPostCard extends StatelessWidget {
   final String bar;
@@ -209,12 +210,18 @@ class FeedPostCard extends StatelessWidget {
                 ),
                 Padding(
                     padding: EdgeInsets.only(right: 8, top: 8),
-                    child: Text(
-                      'User Rating: $rating/10',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'Merriweather-Bold',
-                          fontSize: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        ReportPost(this.uuid),
+                        Text(
+                          'User Rating: $rating/10',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Merriweather-Bold',
+                              fontSize: 16),
+                        ),
+                      ],
                     ))
               ],
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
