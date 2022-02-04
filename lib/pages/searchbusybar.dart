@@ -95,6 +95,41 @@ class _SearchBusyBarState extends State<SearchBusyBar> {
     }
   }
 
+  openGoogleMapsUrl() async {
+    if (barName == null) {
+      final snackBar = SnackBar(
+          content: Text('Error: fill out the required fields',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 20)),
+          backgroundColor: Colors.red);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else if (neighborhood == null) {
+      String _url = 'https://google.com/maps/search';
+      barName = barName!.replaceAll(' ', '-');
+      _url += '/${widget.location}+$barName+bar';
+      await launch(_url, forceWebView: true, enableJavaScript: true);
+      Navigator.pushReplacementNamed(context, FeedBack.route,
+          arguments: FeedBackArgs(location: widget.location, bar: barName!));
+    } else {
+      String _url = 'https://google.com/maps/search';
+      barName = barName!.replaceAll(' ', '-');
+      neighborhood = neighborhood!.replaceAll(' ', '-');
+      _url += '/${widget.location}+$neighborhood+$barName+bar';
+      await launch(_url, forceWebView: true, enableJavaScript: true);
+      Navigator.pushReplacementNamed(
+        context,
+        FeedBack.route,
+        arguments: FeedBackArgs(
+            location: widget.location,
+            bar: barName!,
+            neighborhood: neighborhood!),
+      );
+    }
+  }
+
   openGoogleUrl() async {
     if (barName == null) {
       final snackBar = SnackBar(
@@ -109,7 +144,7 @@ class _SearchBusyBarState extends State<SearchBusyBar> {
     } else if (neighborhood == null) {
       String _url = 'https://google.com/search';
       barName = barName!.replaceAll(' ', '-');
-      _url += '?q=${widget.location}+$barName';
+      _url += '?q=${widget.location}+$barName+bar';
       await launch(_url, forceWebView: true, enableJavaScript: true);
       Navigator.pushReplacementNamed(context, FeedBack.route,
           arguments: FeedBackArgs(location: widget.location, bar: barName!));
@@ -117,7 +152,7 @@ class _SearchBusyBarState extends State<SearchBusyBar> {
       String _url = 'https://google.com/search';
       barName = barName!.replaceAll(' ', '-');
       neighborhood = neighborhood!.replaceAll(' ', '-');
-      _url += '?q=${widget.location}+$neighborhood+$barName';
+      _url += '?q=${widget.location}+$neighborhood+$barName+bar';
       await launch(_url, forceWebView: true, enableJavaScript: true);
       Navigator.pushReplacementNamed(context, FeedBack.route,
           arguments: FeedBackArgs(
@@ -291,7 +326,7 @@ class _SearchBusyBarState extends State<SearchBusyBar> {
               color: Colors.white,
               thickness: 1.5,
             ),
-            _buttonRow(),
+            ..._buttonColumn(),
             const Divider(
               color: Colors.white,
               thickness: 1.5,
@@ -302,61 +337,70 @@ class _SearchBusyBarState extends State<SearchBusyBar> {
     );
   }
 
-  Widget _buttonRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () {
-              searchBusyBarApi();
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'See what WE say',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14),
-              ),
-            ),
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
-                shape: MaterialStateProperty.all<OutlinedBorder>(
-                    RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                        side: BorderSide(color: Colors.red)))),
+  List<Widget> _buttonColumn() {
+    return [
+      ElevatedButton(
+        onPressed: () {
+          searchBusyBarApi();
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'Check Pubcoasters',
+            style: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
           ),
         ),
-        VerticalDivider(
-          color: Colors.white,
-          thickness: 1.5,
-        ),
-        Expanded(
-            child: ElevatedButton(
-          onPressed: () {
-            openGoogleUrl();
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'See what Google says',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14),
-            ),
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+            shape: MaterialStateProperty.all<OutlinedBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: Colors.red)))),
+      ),
+      VerticalDivider(
+        color: Colors.white,
+        thickness: 1.5,
+      ),
+      ElevatedButton(
+        onPressed: () {
+          openGoogleUrl();
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'Open Google Search',
+            style: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
           ),
-          style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
-              shape: MaterialStateProperty.all<OutlinedBorder>(
-                  RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                      side: BorderSide(color: Colors.red)))),
-        )),
-      ],
-    );
+        ),
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+            shape: MaterialStateProperty.all<OutlinedBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: Colors.red)))),
+      ),
+      ElevatedButton(
+        onPressed: () {
+          openGoogleMapsUrl();
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'Open Google Maps',
+            style: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+          ),
+        ),
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+            shape: MaterialStateProperty.all<OutlinedBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: Colors.red)))),
+      ),
+    ];
   }
 
   @override
